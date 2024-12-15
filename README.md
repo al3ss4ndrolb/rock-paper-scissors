@@ -1,0 +1,1 @@
+This is my own attemp to make a rock-paper-scissors program on JavaSript. This will be my fist JS program, I'm  quite excited! 
