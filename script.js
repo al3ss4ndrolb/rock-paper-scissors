@@ -21,75 +21,70 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let input = prompt("Rock, paper or scissors?", "").toLowerCase();
+const resultDiv = document.querySelector(".result");
+const scoreDiv = document.querySelector(".score");
 
-  switch (input) {
-    case "rock":
-    case "paper":
-    case "scissors":
-    // return input
+let humanScore = 0;
+let computerScore = 0;
 
-    default:
-      return "invalid response";
+function playRound(humanChoice, computerChoice) {
+  if (humanChoice === computerChoice) {
+    console.log("It's a tie!");
+    return "tie";
+  }
+
+  // Check if the human wins
+  if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+  ) {
+    humanScore++;
+    console.log(`You win, ${humanChoice} beats ${computerChoice}.`);
+    return "human";
+  } else {
+    // Otherwise, the computer wins
+    computerScore++;
+    console.log(`You lose, ${computerChoice} beats ${humanChoice}.`);
+    return "computer";
   }
 }
 
-function playGame() {
-  // calling these functions here so the score doesn't reset
-  let humanScore = 0;
-  let computerScore = 0;
+function updateScore() {
+  scoreDiv.textContent = `Score -> Human: ${humanScore}, Computer: ${computerScore}`;
+}
 
-  function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-      console.log("It's a tie!");
-      return;
-    }
+// Function to check if the game is over
+function checkGameOver() {
+  if (humanScore === 5 || computerScore === 5) {
+    const winner =
+      humanScore > computerScore
+        ? "You win the game!"
+        : "Computer wins the game!";
+    resultDiv.textContent = winner;
+    resultDiv.style.fontWeight = "bold";
 
-    // Check if the human wins
-    if (
-      (humanChoice === "rock" && computerChoice === "scissors") ||
-      (humanChoice === "paper" && computerChoice === "rock") ||
-      (humanChoice === "scissors" && computerChoice === "paper")
-    ) {
-      humanScore++;
-      console.log(`You win, ${humanChoice} beats ${computerChoice}.`);
-      return "human";
-    } else {
-      // Otherwise, the computer wins
-      computerScore++;
-      console.log(`You lose, ${computerChoice} beats ${humanChoice}.`);
-      return "computer";
-    }
+    // Reset scores
+    humanScore = 0;
+    computerScore = 0;
+    updateScore();
   }
+}
 
-  for (let round = 1; round <= 5; round++) {
-    console.log(`\nRound ${round}:`);
+const buttons = document.querySelectorAll("button");
 
-    const humanChoice = getHumanChoice();
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const humanChoice = e.target.getAttribute("data-choice");
     const computerChoice = getComputerChoice();
 
-    const result = playRound(humanChoice, computerChoice);
+    const resultMessage = playRound(humanChoice, computerChoice);
 
-    if (result === "human") {
-      humanScore++;
-    } else if (result === "computer") {
-      computerScore++;
-    }
+    resultDiv.textContent = resultMessage;
 
-    console.log(
-      `Scores after Round ${round}: Human - ${humanScore}, Computer - ${computerScore}`
-    );
-  }
+    updateScore();
 
-  console.log("\nGame Over!");
-  if (humanScore > computerScore) {
-    alert("Congratulations, you win the game!");
-  } else if (computerScore > humanScore) {
-    alert("Sorry, the computer wins this time.");
-  } else if (computerScore === humanScore) {
-    alert("It's a tie!");
-  }
-}
-
-playGame();
+    // Check if the game is over
+    checkGameOver();
+  });
+});

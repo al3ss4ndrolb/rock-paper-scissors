@@ -1,12 +1,38 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+}
+.score {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
 .container {
   display: flex;
+  flex-direction: column;
+  border: solid black;
   padding: 40px 100px;
   background-color: pink;
   gap: 3em;
-  justify-content: space-evenly;
+  text-align: center;
   flex: 1;
+}
+
+.buttons {
+  display: flex;
+  gap: 3em;
+  justify-content: space-around;
 }
 
 .button {
   padding: 15px 20px;
+  border: solid black;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 }
