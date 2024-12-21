@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  padding: 40px 100px;
+  background-color: pink;
+  gap: 3em;
+  justify-content: space-evenly;
+  flex: 1;
+}
+
+.button {
+  padding: 15px 20px;
+}
