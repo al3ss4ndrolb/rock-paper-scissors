@@ -1,11 +1,5 @@
-// creare function getComputerChoice
-// return rock paper || scissors
-// use math.random(2)
-//
-
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3);
-
   switch (computerChoice) {
     case 0:
       return "rock";
@@ -30,7 +24,7 @@ let computerScore = 0;
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
     console.log("It's a tie!");
-    return "tie";
+    return `It's a tie, ${humanChoice} doesn't beat ${computerChoice}.`;
   }
 
   // Check if the human wins
@@ -40,13 +34,11 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     humanScore++;
-    console.log(`You win, ${humanChoice} beats ${computerChoice}.`);
-    return "human";
+    return `You win, ${humanChoice} beats ${computerChoice}.`;
   } else {
     // Otherwise, the computer wins
     computerScore++;
-    console.log(`You lose, ${computerChoice} beats ${humanChoice}.`);
-    return "computer";
+    return `You lose, ${computerChoice} beats ${humanChoice}.`;
   }
 }
 

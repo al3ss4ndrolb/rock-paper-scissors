@@ -12,6 +12,11 @@ body {
   font-weight: bold;
 }
 
+.result-and-score {
+  margin: 4em;
+  text-align: center;
+  font-size: 18px;
+}
 .container {
   display: flex;
   flex-direction: column;
